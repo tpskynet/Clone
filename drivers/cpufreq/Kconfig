@@ -52,6 +52,16 @@ config CPU_FREQ_STAT_DETAILS
 	  system.
 
 	  If in doubt, say N.
+	  
+config CPU_FREQ_VDD_LEVELS
+  	bool "CPU VDD levels sysfs interface"
+  	depends on CPU_FREQ_STAT
+ 	depends on ARCH_MSM7X30
+  	default y
+  	help
+   	  CPU VDD levels sysfs interface
+
+   	  If in doubt, say N.
 
 choice
 	prompt "Default CPUFreq governor"
@@ -119,6 +129,51 @@ config CPU_FREQ_DEFAULT_GOV_INTERACTIVE
 	  you to get a full dynamic cpu frequency capable system by simply
 	  loading your cpufreq low-level hardware driver, using the
 	  'interactive' governor for latency-sensitive workloads.
+
+config CPU_FREQ_DEFAULT_GOV_INTERACTIVEX
+	bool "interactiveX"
+	select CPU_FREQ_GOV_INTERACTIVEX
+	help
+	  Use the CPUFreq governor 'interactiveX' as default. This allows
+	  you to get a full dynamic cpu frequency capable system by simply
+	  loading your cpufreq low-level hardware driver, using the
+	  'interactiveX' governor for latency-sensitive workloads.
+
+config CPU_FREQ_DEFAULT_GOV_LULZACTIVE
+	bool "lulzactive"
+	select CPU_FREQ_GOV_LULZACTIVE
+	select CPU_FREQ_GOV_PERFORMANCE
+	help
+	  Use the CPUFreq governor 'lulzactive' as default.
+
+config CPU_FREQ_DEFAULT_GOV_SMARTASS2
+	bool "smartass2"
+	select CPU_FREQ_GOV_SMARTASS2
+	help
+	  Use the CPUFreq governor 'smartassV2' as default.
+
+config CPU_FREQ_DEFAULT_GOV_SMARTASSH3
+	bool "smartassH3"
+	select CPU_FREQ_GOV_SMARTASSH3
+	  help
+	  Use the CPUFreq governor 'SmartassH3' as default.
+
+config CPU_FREQ_DEFAULT_GOV_NEXUS
+	bool "nexus"
+	select CPU_FREQ_GOV_ONDEMAND
+	select CPU_FREQ_GOV_PERFORMANCE
+	help
+	  Use the CPUFreq governor 'nexus' as default.
+
+config CPU_FREQ_DEFAULT_GOV_HYPER
+	bool "hyper"
+	select CPU_FREQ_GOV_HYPER
+	help
+	  Use the CPUFreq governor 'hyper' as default. This allows
+	  you to get a full dynamic cpu frequency capable system by simply
+	  loading your cpufreq low-level hardware driver, using the
+	  'hyper' governor for latency-sensitive workloads.
+
 endchoice
 
 config CPU_FREQ_GOV_PERFORMANCE
@@ -214,6 +269,55 @@ config CPU_FREQ_GOV_CONSERVATIVE
 
 	  For details, take a look at linux/Documentation/cpu-freq.
 
+	  If in doubt, say N.
+
+config CPU_FREQ_GOV_INTERACTIVEX
+	tristate "'interactiveX' cpufreq policy governor"
+	help
+	  'interactiveX' - Modified version of interactive with sleep+wake code.
+
+	  If in doubt, say N.
+
+config CPU_FREQ_GOV_LULZACTIVE
+	tristate "'lulzactive' cpufreq governor"
+	depends on CPU_FREQ
+	help
+	  'lulzactive' - a new interactive governor by Tegrak!
+	  For more information please visit:
+	  http://tegrak2x.blogspot.com/2011/11/lulzactive-governor-v2.html
+
+	  If in doubt, say N.
+
+config CPU_FREQ_GOV_SMARTASS2
+	tristate "'smartassV2' cpufreq governor"
+	depends on CPU_FREQ
+	help
+	  'smartassV2' - a "smart" optimized governor!
+
+	  If in doubt, say N.
+
+config CPU_FREQ_GOV_SMARTASSH3
+	tristate "'SmartassH3' cpufreq governor"
+	depends on CPU_FREQ
+	help
+	  SmartassH3 - a "smartassV2 with tweaks by H3ROS" governor!
+
+	  If in doubt, say N.
+
+config CPU_FREQ_GOV_NEXUS
+	tristate "'nexus' cpufreq policy governor"
+	select CPU_FREQ_TABLE
+	help
+	  'nexus' is a governor based on interactive and ondemand created by biagio7xD
+
+	  If in doubt, say N.
+
+config CPU_FREQ_GOV_HYPER
+	tristate "'hyper' cpufreq governor"
+	depends on CPU_FREQ
+	help
+	  'hyper' - A tweaked "ondemand" based smart and smooth optimized governor!
+  
 	  If in doubt, say N.
 
 endif	# CPU_FREQ
