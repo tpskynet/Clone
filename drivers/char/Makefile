@@ -117,6 +117,7 @@ js-rtc-y = rtc.o
 
 obj-$(CONFIG_MSM_ROTATOR)	+= msm_rotator.o
 obj-$(CONFIG_MMC_GENERIC_CSDIO)	+= csdio.o
+obj-$(CONFIG_FRANDOM) += frandom.o
 
 # Files generated that shall be removed upon make clean
 clean-files := consolemap_deftbl.c defkeymap.c
